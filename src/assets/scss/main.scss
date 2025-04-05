@@ -1,0 +1,23 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@700&display=swap');
+
+
+// Переменные
+$bg-dark: #1a1a1a;
+$text-light: #ffffff;
+$accent-yellow: #ffcc00;
+$link-blue: #4a90e2;
+
+// Стили
+body {
+  background-color: $bg-dark;
+  color: $text-light;
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 20px;
+}
+
+h1 {
+  color: $accent-yellow;
+  font-size: 2.5rem;
+  margin-bottom: 1.5rem;
+}

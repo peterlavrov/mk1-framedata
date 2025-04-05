@@ -10,29 +10,29 @@
         "recovery": 20,
         "onBlock": -5,
         "damage": 70
-      },
-      {
-        "name": "Teleport",
-        "input": "DB2",
-        "startup": 15,
-        "active": 3,
-        "recovery": 25,
-        "onBlock": -10,
-        "damage": 60
       }
     ]
   },
   {
-    "name": "Sub-Zero",
+    "name": "Kitana",
     "moves": [
       {
-        "name": "Ice Ball",
-        "input": "BF2",
+        "name": "Fan Lift",
+        "input": "DB2",
         "startup": 12,
-        "active": 2,
+        "active": 3,
         "recovery": 18,
-        "onBlock": -3,
-        "damage": 50
+        "onBlock": 2,
+        "damage": 60
+      },
+      {
+        "name": "Square Wave",
+        "input": "BF3",
+        "startup": 15,
+        "active": 4,
+        "recovery": 25,
+        "onBlock": -8,
+        "damage": 80
       }
     ]
   }
