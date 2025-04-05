@@ -1,38 +1,112 @@
 [
   {
     "name": "Scorpion",
+    "type": "main",
     "moves": [
       {
         "name": "Spear",
+        "type": "special move",
+        "attackType": "Mid",
         "input": "BF1",
         "startup": 10,
         "active": 2,
         "recovery": 20,
         "onBlock": -5,
-        "damage": 70
+        "damage": 70,
+        "cancelable": true,
+        "cancelAdvantage": 2,
+        "extraOptions": null
+      },
+      {
+        "name": "Punch Combo",
+        "type": "string",
+        "attackType": "High",
+        "input": "1,1,2",
+        "startup": 8,
+        "active": 3,
+        "recovery": 15,
+        "onBlock": 0,
+        "damage": 50,
+        "cancelable": true,
+        "cancelAdvantage": 3,
+        "extraOptions": null
       }
     ]
   },
   {
-    "name": "Kitana",
+    "name": "Omni-Man",
+    "type": "main",
     "moves": [
       {
-        "name": "Fan Lift",
-        "input": "DB2",
-        "startup": 12,
+        "name": "Punch Combo",
+        "type": "string",
+        "attackType": "High",
+        "input": "1,1,2",
+        "startup": 8,
         "active": 3,
-        "recovery": 18,
-        "onBlock": 2,
-        "damage": 60
+        "recovery": 15,
+        "onBlock": 0,
+        "damage": 50,
+        "cancelable": true,
+        "cancelAdvantage": 3,
+        "extraOptions": null
       },
       {
-        "name": "Square Wave",
-        "input": "BF3",
+        "name": "Stance",
+        "type": "special move",
+        "attackType": "Low",
+        "input": "DB4",
+        "startup": 12,
+        "active": 0,
+        "recovery": 18,
+        "onBlock": -3,
+        "damage": 0,
+        "cancelable": true,
+        "cancelAdvantage": 5,
+        "extraOptions": [
+          "Cancel (hold back)",
+          "Teleport behind (press F)",
+          "Stance attack (press 2)"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Ferra",
+    "type": "kameo",
+    "moves": [
+      {
+        "name": "Toss",
+        "type": "special move",
+        "attackType": "Mid",
+        "input": "Kameo + F",
         "startup": 15,
-        "active": 4,
-        "recovery": 25,
+        "active": 5,
+        "recovery": 20,
         "onBlock": -8,
-        "damage": 80
+        "damage": 60,
+        "cancelable": false,
+        "cancelAdvantage": null,
+        "extraOptions": null,
+        "ambush": false
+      },
+      {
+        "name": "Shoulder Slam",
+        "type": "special move",
+        "attackType": "High",
+        "input": "Kameo + B (while active)",
+        "startup": 10,
+        "active": 3,
+        "recovery": 18,
+        "onBlock": -5,
+        "damage": 50,
+        "cancelable": false,
+        "cancelAdvantage": null,
+        "extraOptions": [
+          "Front Punch (1): Slam",
+          "Back Kick (4): Drop"
+        ],
+        "ambush": true
       }
     ]
   }

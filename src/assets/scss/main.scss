@@ -1,23 +1,235 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@700&display=swap');
-
-
-// Переменные
 $bg-dark: #1a1a1a;
 $text-light: #ffffff;
 $accent-yellow: #ffcc00;
 $link-blue: #4a90e2;
 
-// Стили
-body {
-  background-color: $bg-dark;
-  color: $text-light;
-  font-family: Arial, sans-serif;
-  margin: 0;
-  padding: 20px;
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@700&display=swap');
+
+/* Базовые цвета из base.css */
+:root {
+  --vt-c-white: #ffffff;
+  --vt-c-white-soft: #f8f8f8;
+  --vt-c-white-mute: #f2f2f2;
+  --vt-c-black: #181818;
+  --vt-c-black-soft: #222222;
+  --vt-c-black-mute: #282828;
+  --vt-c-indigo: #2c3e50;
+  --vt-c-divider-light-1: rgba(60, 60, 60, 0.29);
+  --vt-c-divider-light-2: rgba(60, 60, 60, 0.12);
+  --vt-c-divider-dark-1: rgba(84, 84, 84, 0.65);
+  --vt-c-divider-dark-2: rgba(84, 84, 84, 0.48);
+  --vt-c-text-light-1: #4a2c2a;
+  --vt-c-text-light-2: rgba(74, 44, 42, 0.66);
+  --vt-c-text-dark-1: var(--vt-c-white);
+  --vt-c-text-dark-2: rgba(235, 235, 235, 0.64);
+
+  --bg-color: #fff8e1;
+  --text-color: #4a2c2a;
+  --accent-color: #ffcc00;
+  --accent-hover: #ffd633;
+  --link-color: #4a90e2;
+  --link-hover: #6ab0ff;
+  --table-bg: #f5e8c7;
+  --table-hover: #f0d9a8;
 }
 
+/* Темная тема */
+html[data-theme="dark"] {
+  --bg-color: #1a1a1a;
+  --text-color: #ffffff;
+  --accent-hover: #ffd633;
+  --link-hover: #80c0ff;
+  --table-bg: #151515;
+  --table-hover: #2e2e2e;
+}
+
+/* Светлая тема */
+html[data-theme="light"] {
+  --bg-color: #fff8e1;
+  --text-color: #4a2c2a;
+  --accent-hover: #ffd633;
+  --link-hover: #6ab0ff;
+  --table-bg: #f5e8c7;
+  --table-hover: #f0d9a8;
+}
+
+/* Системная тема */
+@media (prefers-color-scheme: dark) {
+  html:not([data-theme]) {
+    --bg-color: #1a1a1a;
+    --text-color: #ffffff;
+    --accent-hover: #ffd633;
+    --link-hover: #80c0ff;
+    --table-bg: #151515;
+    --table-hover: #2e2e2e;
+  }
+}
+
+/* Базовые стили */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  font-weight: normal;
+}
+
+/* ... (предыдущий код до body остается без изменений) */
+
+body {
+  min-height: 100vh;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  font-family: 'Cinzel', serif;
+  font-size: 15px;
+  line-height: 1.6;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  transition: background-color 0.5s ease, color 0.5s ease; /* Единый переход */
+  padding: 10px;
+}
+
+#app {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 1rem;
+  font-weight: normal;
+  color: var(--text-color); /* Убираем background-color */
+}
+
+/* Остальные стили без изменений */
+
 h1 {
-  color: $accent-yellow;
-  font-size: 2.5rem;
-  margin-bottom: 1.5rem;
+  color: var(--accent-color);
+  font-size: 1.5rem;
+}
+
+a {
+  text-decoration: none;
+  color: var(--link-color);
+  transition: 0.4s;
+  padding: 3px;
+
+  @media (hover: hover) {
+    &:hover {
+      color: var(--link-hover);
+      background-color: hsla(160, 100%, 37%, 0.2);
+    }
+  }
+}
+
+.green {
+  color: hsla(160, 100%, 37%, 1);
+}
+
+/* Адаптация под узкие экраны */
+@media (max-width: 1024px) {
+  #app {
+    max-width: 900px;
+  }
+}
+
+@media (max-width: 992px) {
+  #app {
+    max-width: 850px;
+  }
+  h1 {
+    font-size: 1.4rem;
+  }
+}
+
+@media (max-width: 768px) {
+  #app {
+    max-width: 700px;
+    padding: 0.75rem;
+  }
+  h1 {
+    font-size: 1.3rem;
+  }
+}
+
+@media (max-width: 600px) {
+  #app {
+    max-width: 100%;
+    padding: 0.5rem;
+  }
+  h1 {
+    font-size: 1.2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  body {
+    padding: 5px;
+    font-size: 14px;
+  }
+  #app {
+    padding: 0.25rem;
+  }
+  h1 {
+    font-size: 1.1rem;
+  }
+}
+
+@media (max-width: 400px) {
+  h1 {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 360px) {
+  body {
+    font-size: 13px;
+  }
+  h1 {
+    font-size: 0.9rem;
+  }
+}
+
+/* Адаптация под широкие экраны */
+@media (min-width: 1110px) {
+  #app {
+    max-width: 1400px;
+  }
+  h1 {
+    font-size: 1.8rem;
+  }
+}
+
+@media (min-width: 1240px) {
+  #app {
+    max-width: 1600px;
+  }
+  h1 {
+    font-size: 2rem;
+  }
+}
+
+@media (min-width: 1440px) {
+  #app {
+    max-width: 1800px;
+  }
+  h1 {
+    font-size: 2.2rem;
+  }
+}
+
+@media (min-width: 1600px) {
+  #app {
+    max-width: 2000px;
+  }
+  h1 {
+    font-size: 2.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  body {
+    display: flex;
+    place-items: center;
+  }
+  #app {
+    padding: 0 2rem;
+  }
 }
