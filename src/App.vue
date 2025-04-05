@@ -9,7 +9,6 @@ import HelloWorld from './components/HelloWorld.vue'
   </header>
 
   <RouterView />
-  <Analytics />
 </template>
 
 <style scoped>

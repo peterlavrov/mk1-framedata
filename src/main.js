@@ -1,15 +1,16 @@
-import './assets/main.css'
+import './assets/main.css';
 
-import { createApp } from 'vue'
-import { createPinia } from 'pinia'
-import { Analytics } from "@vercel/analytics/vue"
+import { createApp } from 'vue';
+import { createPinia } from 'pinia';
+import { inject } from '@vercel/analytics/vue'; // Используем inject вместо Analytics
 
-import App from './App.vue'
-import router from './router'
+import App from './App.vue';
+import router from './router';
 
-const app = createApp(App)
+const app = createApp(App);
 
-app.use(createPinia())
-app.use(router)
+app.use(createPinia());
+app.use(router);
+app.use(inject); // Подключаем аналитику глобально
 
-app.mount('#app')
+app.mount('#app');
