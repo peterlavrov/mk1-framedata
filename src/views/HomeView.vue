@@ -1,22 +1,22 @@
 <template>
   <div class="home">
     <h1>Choose your destiny:</h1>
-    <section class="main-fighters">
-      <h2>Main Fighters</h2>
-      <ul class="fighter-list">
-        <li v-for="fighter in mainFighters" :key="fighter.name">
-          <router-link :to="`/fighter/${fighter.name}`">
-            {{ fighter.name }}
+    <section class="main-characters">
+      <h2>Main Characters</h2>
+      <ul class="character-list">
+        <li v-for="character in mainCharacters" :key="character.name">
+          <router-link :to="`/fighter/${character.name}`">
+            {{ character.name }}
           </router-link>
         </li>
       </ul>
     </section>
-    <section class="kameo-fighters">
-      <h2>Kameo Fighters</h2>
-      <ul class="fighter-list">
-        <li v-for="fighter in kameoFighters" :key="fighter.name">
-          <router-link :to="`/kameo/${fighter.name}`">
-            {{ fighter.name }}
+    <section class="kameo-characters">
+      <h2>Kameo Characters</h2>
+      <ul class="character-list">
+        <li v-for="character in kameoCharacters" :key="character.name">
+          <router-link :to="`/kameo/${character.name}`">
+            {{ character.name }}
           </router-link>
         </li>
       </ul>
@@ -30,10 +30,10 @@ import fightersData from '../data/fighters.json';
 export default {
   name: 'HomeView',
   computed: {
-    mainFighters() {
+    mainCharacters() {
       return fightersData.filter(f => f.type === 'main');
     },
-    kameoFighters() {
+    kameoCharacters() {
       return fightersData.filter(f => f.type === 'kameo');
     }
   }
@@ -56,7 +56,7 @@ h2 {
   font-size: 1.3rem;
 }
 
-.fighter-list {
+.character-list {
   list-style: none;
   padding: 0;
   display: grid;
@@ -76,37 +76,37 @@ h2 {
 }
 
 @media (max-width: 768px) {
-  .fighter-list {
+  .character-list {
     grid-template-columns: 1fr;
   }
 }
 
 @media (min-width: 769px) {
-  .fighter-list {
+  .character-list {
     grid-template-columns: repeat(2, 1fr);
   }
 }
 
 @media (min-width: 1024px) {
-  .fighter-list {
+  .character-list {
     grid-template-columns: repeat(3, 1fr);
   }
 }
 
 @media (min-width: 1240px) {
-  .fighter-list {
+  .character-list {
     grid-template-columns: repeat(4, 1fr);
   }
 }
 
 @media (min-width: 1440px) {
-  .fighter-list {
+  .character-list {
     grid-template-columns: repeat(5, 1fr);
   }
 }
 
 @media (min-width: 1600px) {
-  .fighter-list {
+  .character-list {
     grid-template-columns: repeat(6, 1fr);
   }
 }

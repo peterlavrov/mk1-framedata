@@ -50,6 +50,9 @@ onMounted(() => {
       </label>
     </div>
     <RouterView />
+    <footer class="developers">
+      <p>Developed by <a href="https://github.com/peterlavrov" target="_blank">Peter Lavrov</a> & Grok 3 (xAI)</p>
+    </footer>
   </div>
 </template>
 
@@ -63,7 +66,7 @@ header {
   justify-content: space-between;
   align-items: center;
   line-height: 1.5;
-  color: var(--text-color); /* Убираем background-color */
+  color: var(--text-color);
 }
 
 .theme-toggle {
@@ -97,6 +100,9 @@ header {
   background-color: var(--accent-color);
   border-radius: 50%;
   transition: transform 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center; /* Центрируем содержимое кружка */
 }
 
 .theme-toggle .icon {
@@ -107,17 +113,15 @@ header {
 }
 
 .theme-toggle .sun {
-  left: 5px;
+  left: 50%;
+  transform: translate(-50%, -50%); /* Центрируем по горизонтали и вертикали */
   opacity: 1;
 }
 
 .theme-toggle .moon {
-  right: 5px;
+  right: 50%;
+  transform: translate(50%, -50%); /* Центрируем по горизонтали и вертикали */
   opacity: 0;
-}
-
-#theme-switch:checked + label {
-  background-color: var(--text-color);
 }
 
 #theme-switch:checked + label .toggle {
@@ -146,13 +150,15 @@ header {
     font-size: 14px;
   }
   .theme-toggle .sun {
-    left: 4px; /* Уменьшаем отступ */
+    left: 50%;
+    transform: translate(-50%, -50%);
   }
   .theme-toggle .moon {
-    right: 4px; /* Уменьшаем отступ */
+    right: 50%;
+    transform: translate(50%, -50%);
   }
   #theme-switch:checked + label .toggle {
-    transform: translateX(25px); /* Корректируем смещение */
+    transform: translateX(25px);
   }
 }
 
@@ -169,13 +175,47 @@ header {
     font-size: 12px;
   }
   .theme-toggle .sun {
-    left: 3px;
+    left: 50%;
+    transform: translate(-50%, -50%);
   }
   .theme-toggle .moon {
-    right: 3px;
+    right: 50%;
+    transform: translate(50%, -50%);
   }
   #theme-switch:checked + label .toggle {
-    transform: translateX(20px); /* Корректируем смещение */
+    transform: translateX(20px);
+  }
+}
+
+.developers {
+  position: fixed;
+  bottom: 10px;
+  right: 10px;
+  font-size: 0.9rem;
+  color: var(--text-color);
+  z-index: 1000;
+
+  a {
+    color: var(--link-color);
+    text-decoration: none;
+
+    &:hover {
+      color: var(--link-hover);
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .developers {
+    font-size: 0.8rem;
+    bottom: 5px;
+    right: 5px;
+  }
+}
+
+@media (max-width: 360px) {
+  .developers {
+    font-size: 0.7rem;
   }
 }
 </style>

@@ -4,6 +4,80 @@
     "type": "main",
     "moves": [
       {
+        "name": "Punch Combo",
+        "type": "string",
+        "variations": [
+          {
+            "variationName": "Quick Jab",
+            "input": "1",
+            "attackType": "High",
+            "startup": 8,
+            "active": 3,
+            "recovery": 12,
+            "onBlock": -2,
+            "damage": 20,
+            "cancelable": true,
+            "cancelAdvantage": 2
+          },
+          {
+            "variationName": "Double Punch",
+            "input": "1,1",
+            "attackType": "High",
+            "startup": 8,
+            "active": 3,
+            "recovery": 14,
+            "onBlock": -3,
+            "damage": 35,
+            "cancelable": true,
+            "cancelAdvantage": 3
+          },
+          {
+            "variationName": "Uppercut Finish",
+            "input": "1,1,2",
+            "attackType": "Mid",
+            "startup": 8,
+            "active": 3,
+            "recovery": 15,
+            "onBlock": 0,
+            "damage": 50,
+            "cancelable": true,
+            "cancelAdvantage": 3
+          }
+        ],
+        "extraOptions": null
+      },
+      {
+        "name": "Forward Strike",
+        "type": "string",
+        "variations": [
+          {
+            "variationName": "Forward Kick",
+            "input": "F+3",
+            "attackType": "Mid",
+            "startup": 10,
+            "active": 4,
+            "recovery": 16,
+            "onBlock": -3,
+            "damage": 30,
+            "cancelable": true,
+            "cancelAdvantage": 2
+          },
+          {
+            "variationName": "Kick-Punch",
+            "input": "F+3,2",
+            "attackType": "High",
+            "startup": 10,
+            "active": 4,
+            "recovery": 18,
+            "onBlock": -5,
+            "damage": 55,
+            "cancelable": false,
+            "cancelAdvantage": null
+          }
+        ],
+        "extraOptions": null
+      },
+      {
         "name": "Spear",
         "type": "special move",
         "attackType": "Mid",
@@ -15,59 +89,244 @@
         "damage": 70,
         "cancelable": true,
         "cancelAdvantage": 2,
-        "extraOptions": null
+        "extraOptions": null,
+        "usableInAir": false,
+        "enhanced": { "cost": "1 bar", "startup": 9, "damage": 90 }
       },
       {
-        "name": "Punch Combo",
-        "type": "string",
-        "attackType": "High",
-        "input": "1,1,2",
-        "startup": 8,
-        "active": 3,
-        "recovery": 15,
-        "onBlock": 0,
-        "damage": 50,
-        "cancelable": true,
-        "cancelAdvantage": 3,
+        "name": "Air Kick",
+        "type": "air",
+        "variations": [
+          {
+            "variationName": "Downward Kick",
+            "input": "D+3 (in air)",
+            "attackType": "Mid",
+            "startup": 12,
+            "active": 4,
+            "recovery": 18,
+            "damage": 60,
+            "cancelable": false,
+            "cancelAdvantage": null
+          }
+        ],
         "extraOptions": null
       }
     ]
   },
   {
-    "name": "Omni-Man",
+    "name": "Smoke",
     "type": "main",
     "moves": [
       {
-        "name": "Punch Combo",
+        "name": "Smoke Combo",
         "type": "string",
-        "attackType": "High",
-        "input": "1,1,2",
-        "startup": 8,
-        "active": 3,
-        "recovery": 15,
-        "onBlock": 0,
-        "damage": 50,
-        "cancelable": true,
-        "cancelAdvantage": 3,
+        "variations": [
+          {
+            "variationName": "Smoke Jab",
+            "input": "1",
+            "attackType": "High",
+            "startup": 7,
+            "active": 2,
+            "recovery": 10,
+            "onBlock": -1,
+            "damage": 15,
+            "cancelable": true,
+            "cancelAdvantage": 1
+          },
+          {
+            "variationName": "Smoke Sweep",
+            "input": "1,1,1,4",
+            "attackType": "Low",
+            "startup": 7,
+            "active": 4,
+            "recovery": 18,
+            "onBlock": -4,
+            "damage": 60,
+            "cancelable": false,
+            "cancelAdvantage": null
+          }
+        ],
         "extraOptions": null
       },
       {
-        "name": "Stance",
+        "name": "Back Smoke",
+        "type": "string",
+        "variations": [
+          {
+            "variationName": "Back Punch",
+            "input": "B+2",
+            "attackType": "Mid",
+            "startup": 9,
+            "active": 3,
+            "recovery": 14,
+            "onBlock": -2,
+            "damage": 25,
+            "cancelable": true,
+            "cancelAdvantage": 2
+          },
+          {
+            "variationName": "Low Smoke",
+            "input": "B+2,4",
+            "attackType": "Low",
+            "startup": 9,
+            "active": 4,
+            "recovery": 16,
+            "onBlock": -3,
+            "damage": 45,
+            "cancelable": true,
+            "cancelAdvantage": 1
+          }
+        ],
+        "extraOptions": null
+      },
+      {
+        "name": "Smoke Bomb",
         "type": "special move",
-        "attackType": "Low",
-        "input": "DB4",
+        "attackType": "Mid",
+        "input": "DB3",
+        "startup": 14,
+        "active": 5,
+        "recovery": 22,
+        "onBlock": -7,
+        "damage": 60,
+        "cancelable": false,
+        "cancelAdvantage": null,
+        "usableInAir": false,
+        "enhanced": { "cost": "1 bar", "startup": 12, "damage": 80 }
+      },
+      {
+        "name": "Air Smoke",
+        "type": "air",
+        "variations": [
+          {
+            "variationName": "Smoke Drop",
+            "input": "2,3 (in air)",
+            "attackType": "Mid",
+            "startup": 11,
+            "active": 4,
+            "recovery": 17,
+            "damage": 55,
+            "cancelable": true,
+            "cancelAdvantage": 2
+          }
+        ],
+        "extraOptions": null
+      }
+    ]
+  },
+  {
+    "name": "Kung Lao",
+    "type": "main",
+    "moves": [
+      {
+        "name": "Hat Trick",
+        "type": "string",
+        "variations": [
+          {
+            "variationName": "Hat Jab",
+            "input": "2",
+            "attackType": "Mid",
+            "startup": 9,
+            "active": 3,
+            "recovery": 13,
+            "onBlock": -2,
+            "damage": 25,
+            "cancelable": true,
+            "cancelAdvantage": 2
+          },
+          {
+            "variationName": "Hat Double",
+            "input": "2,2",
+            "attackType": "Mid",
+            "startup": 9,
+            "active": 3,
+            "recovery": 15,
+            "onBlock": -3,
+            "damage": 40,
+            "cancelable": true,
+            "cancelAdvantage": 3
+          }
+        ],
+        "extraOptions": null
+      },
+      {
+        "name": "Downward Slash",
+        "type": "string",
+        "variations": [
+          {
+            "variationName": "Low Poke",
+            "input": "D+1",
+            "attackType": "Low",
+            "startup": 11,
+            "active": 3,
+            "recovery": 17,
+            "onBlock": -4,
+            "damage": 20,
+            "cancelable": true,
+            "cancelAdvantage": 1
+          },
+          {
+            "variationName": "Slash Kick",
+            "input": "D+1,3",
+            "attackType": "Mid",
+            "startup": 11,
+            "active": 4,
+            "recovery": 19,
+            "onBlock": -6,
+            "damage": 50,
+            "cancelable": false,
+            "cancelAdvantage": null
+          }
+        ],
+        "extraOptions": null
+      },
+      {
+        "name": "Floating Monk",
+        "type": "special move",
+        "attackType": "Parry",
+        "input": "DF2",
+        "startup": 10,
+        "active": 3,
+        "recovery": 15,
+        "onBlock": -4,
+        "damage": 60,
+        "cancelable": false,
+        "cancelAdvantage": null,
+        "usableInAir": false,
+        "enhanced": { "cost": "1 bar", "startup": 8, "damage": 80 }
+      },
+      {
+        "name": "Diving Strike",
+        "type": "special move",
+        "attackType": "Mid",
+        "input": "DF2 (in air)",
         "startup": 12,
-        "active": 0,
+        "active": 4,
         "recovery": 18,
-        "onBlock": -3,
-        "damage": 0,
-        "cancelable": true,
-        "cancelAdvantage": 5,
-        "extraOptions": [
-          "Cancel (hold back)",
-          "Teleport behind (press F)",
-          "Stance attack (press 2)"
-        ]
+        "onBlock": -6,
+        "damage": 65,
+        "cancelable": false,
+        "cancelAdvantage": null,
+        "usableInAir": true,
+        "enhanced": { "cost": "1 bar", "startup": 10, "damage": 85 }
+      },
+      {
+        "name": "Air Spin",
+        "type": "air",
+        "variations": [
+          {
+            "variationName": "Spin Attack",
+            "input": "1,2 (in air)",
+            "attackType": "High",
+            "startup": 10,
+            "active": 3,
+            "recovery": 16,
+            "damage": 50,
+            "cancelable": true,
+            "cancelAdvantage": 2
+          }
+        ],
+        "extraOptions": null
       }
     ]
   },
@@ -88,7 +347,8 @@
         "cancelable": false,
         "cancelAdvantage": null,
         "extraOptions": null,
-        "ambush": false
+        "ambush": false,
+        "kameoMeterCost": "1 bar"
       },
       {
         "name": "Shoulder Slam",
@@ -106,7 +366,30 @@
           "Front Punch (1): Slam",
           "Back Kick (4): Drop"
         ],
-        "ambush": true
+        "ambush": true,
+        "kameoMeterCost": "0.5 bar"
+      }
+    ]
+  },
+  {
+    "name": "Kung Lao (Kameo)",
+    "type": "kameo",
+    "moves": [
+      {
+        "name": "Buzzsaw Hat",
+        "type": "special move",
+        "attackType": "Mid",
+        "input": "Kameo + F",
+        "startup": 12,
+        "active": 4,
+        "recovery": 22,
+        "onBlock": -7,
+        "damage": 55,
+        "cancelable": false,
+        "cancelAdvantage": null,
+        "extraOptions": null,
+        "ambush": false,
+        "kameoMeterCost": "hold (gradual)"
       }
     ]
   }

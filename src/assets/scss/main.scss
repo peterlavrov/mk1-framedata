@@ -45,12 +45,14 @@ html[data-theme="dark"] {
 
 /* Светлая тема */
 html[data-theme="light"] {
-  --bg-color: #fff8e1;
-  --text-color: #4a2c2a;
-  --accent-hover: #ffd633;
-  --link-hover: #6ab0ff;
-  --table-bg: #f5e8c7;
-  --table-hover: #f0d9a8;
+  --bg-color: #e6e1d3;
+  --text-color: #2a1c1a;
+  --accent-color: #e6b800;
+  --accent-hover: #ffcc00;
+  --link-color: #1a73e8;
+  --link-hover: #135ab6;
+  --table-bg: #d9d2b8;
+  --table-hover: #c9c2a6;
 }
 
 /* Системная тема */
@@ -74,8 +76,6 @@ html[data-theme="light"] {
   font-weight: normal;
 }
 
-/* ... (предыдущий код до body остается без изменений) */
-
 body {
   min-height: 100vh;
   background-color: var(--bg-color);
@@ -86,7 +86,7 @@ body {
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  transition: background-color 0.5s ease, color 0.5s ease; /* Единый переход */
+  transition: background-color 0.5s ease, color 0.5s ease;
   padding: 10px;
 }
 
@@ -95,14 +95,14 @@ body {
   margin: 0 auto;
   padding: 1rem;
   font-weight: normal;
-  color: var(--text-color); /* Убираем background-color */
+  color: var(--text-color);
 }
 
-/* Остальные стили без изменений */
-
-h1 {
+h1,
+h2 {
   color: var(--accent-color);
   font-size: 1.5rem;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 1); /* Увеличили тень: больше размытие, полная непрозрачность */
 }
 
 a {
