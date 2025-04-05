@@ -1,0 +1,39 @@
+[
+  {
+    "name": "Scorpion",
+    "moves": [
+      {
+        "name": "Spear",
+        "input": "BF1",
+        "startup": 10,
+        "active": 2,
+        "recovery": 20,
+        "onBlock": -5,
+        "damage": 70
+      },
+      {
+        "name": "Teleport",
+        "input": "DB2",
+        "startup": 15,
+        "active": 3,
+        "recovery": 25,
+        "onBlock": -10,
+        "damage": 60
+      }
+    ]
+  },
+  {
+    "name": "Sub-Zero",
+    "moves": [
+      {
+        "name": "Ice Ball",
+        "input": "BF2",
+        "startup": 12,
+        "active": 2,
+        "recovery": 18,
+        "onBlock": -3,
+        "damage": 50
+      }
+    ]
+  }
+]
