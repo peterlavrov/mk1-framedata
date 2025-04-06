@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div class="container">
     <div class="theme-toggle">
       <input type="checkbox" id="theme-switch" v-model="isDarkTheme" @change="toggleTheme" />
       <label for="theme-switch">
@@ -34,7 +34,7 @@ export default {
   },
   computed: {
     isFighterPage() {
-      return this.$route.name === 'FighterView';
+      return this.$route.name === 'fighter' || this.$route.name === 'kameo';
     },
     isHomePage() {
       return this.$route.path === '/';
@@ -77,13 +77,14 @@ export default {
 };
 </script>
 
-<style lang="scss">
-#app {
+<style lang="scss" scoped>
+.container {
   max-width: 1280px;
   margin: 0 auto;
   padding: 1rem;
-  font-weight: normal;
-  color: var(--text-color);
+  box-sizing: border-box;
+  overflow-x: hidden;
+  min-height: 100vh; /* Перенесли из .app-root */
 }
 
 .footer {
@@ -100,7 +101,7 @@ export default {
 
   &.fixed {
     position: fixed;
-    bottom: 53px; /* Установлено по твоему запросу */
+    bottom: 53px;
     right: 20px;
     opacity: 1;
     visibility: visible;

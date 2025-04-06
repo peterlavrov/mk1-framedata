@@ -14,7 +14,7 @@
           <h2>Strings</h2>
           <router-link to="/" class="back-link">Back to Choose Your Destiny</router-link>
         </div>
-        <div class="table-wrapper">
+        <div class="table-wrapper" ref="tableWrapper">
           <table>
             <tbody>
               <tr><th>Name</th><td v-for="(move, index) in strings" :key="move.name">{{ selectedStringVariation(move, index).variationName }}</td></tr>
@@ -43,7 +43,7 @@
           <h2>Special Moves</h2>
           <router-link to="/" class="back-link">Back to Choose Your Destiny</router-link>
         </div>
-        <div class="table-wrapper">
+        <div class="table-wrapper" ref="tableWrapper">
           <table>
             <tbody>
               <tr><th>Name</th><td v-for="(move, index) in specialMoves" :key="move.name">{{ move.name }}</td></tr>
@@ -75,7 +75,7 @@
           <h2>Air Attacks</h2>
           <router-link to="/" class="back-link">Back to Choose Your Destiny</router-link>
         </div>
-        <div class="table-wrapper">
+        <div class="table-wrapper" ref="tableWrapper">
           <table>
             <tbody>
               <tr><th>Name</th><td v-for="(move, index) in airMoves" :key="move.name">{{ selectedAirVariation(move, index).variationName }}</td></tr>
@@ -104,7 +104,7 @@
         <h2>Kameo Moves</h2>
         <router-link to="/" class="back-link">Back to Choose Your Destiny</router-link>
       </div>
-      <div class="table-wrapper">
+      <div class="table-wrapper" ref="tableWrapper">
         <table>
           <tbody>
             <tr><th>Name</th><td v-for="move in fighter.moves" :key="move.name">{{ move.name }}</td></tr>
@@ -119,7 +119,8 @@
             <tr><th>Cancel Advantage</th><td v-for="move in fighter.moves" :key="move.name">{{ move.cancelable ? move.cancelAdvantage : '-' }}</td></tr>
             <tr v-if="hasExtraOptions(fighter.moves)"><th>Extra Options</th><td v-for="move in fighter.moves" :key="move.name"><div v-if="move.extraOptions" class="extra-options"><span v-for="(option, index) in move.extraOptions" :key="index" class="option">{{ option }}</span></div><span v-else>-</span></td></tr>
             <tr><th>Ambush</th><td v-for="move in fighter.moves" :key="move.name">{{ move.ambush ? 'Yes' : 'No' }}</td></tr>
-            <tr><th>Kameo Meter Cost</th><td v-for="move in fighter.moves" :key="move.name">{{ move.kameoMeterCost }}</td></tr>
+            <tr><th>Activation Cost</th><td v-for="move in fighter.moves" :key="move.name">{{ typeof move.kameoMeterCost === 'object' ? move.kameoMeterCost.activation : move.kameoMeterCost }}</td></tr>
+            <tr v-if="hasHoldCost(fighter.moves)"><th>Hold Cost</th><td v-for="move in fighter.moves" :key="move.name">{{ typeof move.kameoMeterCost === 'object' && move.kameoMeterCost.hold ? move.kameoMeterCost.hold : '-' }}</td></tr>
             <tr><th>Damage</th><td v-for="move in fighter.moves" :key="move.name">{{ move.damage }}</td></tr>
           </tbody>
         </table>
@@ -139,7 +140,10 @@ export default {
       activeTab: 'strings',
       stringSelections: [],
       specialSelections: [],
-      airSelections: []
+      airSelections: [],
+      isDragging: false,
+      startX: 0,
+      scrollLeft: 0
     };
   },
   computed: {
@@ -164,6 +168,16 @@ export default {
     this.fighter = fightersData.find(f => f.name === fighterName) || {};
     this.initializeSelections();
   },
+  mounted() {
+    this.setupDragScroll();
+  },
+  watch: {
+    activeTab() {
+      this.$nextTick(() => {
+        this.setupDragScroll();
+      });
+    }
+  },
   methods: {
     initializeSelections() {
       this.stringSelections = this.strings.map(move => move.variations[move.variations.length - 1].input);
@@ -177,6 +191,9 @@ export default {
     },
     hasExtraOptions(moves) {
       return moves.some(move => move.extraOptions && move.extraOptions.length > 0);
+    },
+    hasHoldCost(moves) {
+      return moves.some(move => typeof move.kameoMeterCost === 'object' && move.kameoMeterCost.hold);
     },
     selectedStringVariation(move, index) {
       return move.variations.find(v => v.input === this.stringSelections[index]) || move.variations[0];
@@ -194,6 +211,50 @@ export default {
       if (type === 'strings') this.stringSelections = [...this.stringSelections];
       if (type === 'special') this.specialSelections = [...this.specialSelections];
       if (type === 'air') this.airSelections = [...this.airSelections];
+    },
+    setupDragScroll() {
+      const wrapper = this.$refs.tableWrapper;
+      if (!wrapper) return;
+
+      wrapper.removeEventListener('mousedown', this.handleMouseDown);
+      wrapper.removeEventListener('mouseleave', this.handleMouseLeave);
+      wrapper.removeEventListener('mouseup', this.handleMouseUp);
+      wrapper.removeEventListener('mousemove', this.handleMouseMove);
+
+      this.handleMouseDown = (e) => {
+        this.isDragging = true;
+        this.startX = e.pageX - wrapper.offsetLeft;
+        this.scrollLeft = wrapper.scrollLeft;
+        wrapper.classList.add('dragging');
+      };
+
+      this.handleMouseLeave = () => {
+        this.isDragging = false;
+        wrapper.classList.remove('dragging');
+      };
+
+      this.handleMouseUp = () => {
+        this.isDragging = false;
+        wrapper.classList.remove('dragging');
+      };
+
+      this.handleMouseMove = (e) => {
+        if (!this.isDragging) return;
+        e.preventDefault();
+        const x = e.pageX - wrapper.offsetLeft;
+        const walk = x - this.startX;
+        wrapper.scrollLeft = this.scrollLeft - walk;
+
+        if (wrapper.scrollLeft < 0) wrapper.scrollLeft = 0;
+        if (wrapper.scrollLeft > wrapper.scrollWidth - wrapper.clientWidth) {
+          wrapper.scrollLeft = wrapper.scrollWidth - wrapper.clientWidth;
+        }
+      };
+
+      wrapper.addEventListener('mousedown', this.handleMouseDown);
+      wrapper.addEventListener('mouseleave', this.handleMouseLeave);
+      wrapper.addEventListener('mouseup', this.handleMouseUp);
+      wrapper.addEventListener('mousemove', this.handleMouseMove);
     }
   }
 };
@@ -201,18 +262,17 @@ export default {
 
 <style lang="scss" scoped>
 .fighter-page {
-  max-width: 1000px;
   margin: 0 auto;
   color: var(--text-color);
+  padding-top: 60px;
+  overflow-x: hidden;
+  max-width: 100%;
+  box-sizing: border-box;
 }
 
 section {
   margin-bottom: 2rem;
-}
-
-h2 {
-  color: var(--accent-color);
-  font-size: 1.3rem;
+  max-width: 100%;
 }
 
 .tab-header {
@@ -220,56 +280,97 @@ h2 {
   justify-content: space-between;
   align-items: center;
   margin-bottom: 10px;
+  max-width: 100%;
+}
+
+.tab-content {
+  max-width: 100%;
 }
 
 .tabs {
   display: flex;
   gap: 10px;
   margin-bottom: 20px;
-}
+  max-width: 100%;
+  flex-wrap: wrap;
 
-.tabs button {
-  padding: 10px 20px;
-  background-color: var(--table-bg);
-  border: 1px solid #333;
-  border-radius: 5px;
-  color: var(--text-color);
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
+  button {
+    padding: 10px 20px;
+    background-color: var(--table-bg);
+    border: 1px solid #333;
+    border-radius: 5px;
+    color: var(--text-color);
+    cursor: pointer;
+    transition: background-color 0.3s ease;
 
-.tabs button.active {
-  background-color: var(--accent-color);
-  color: var(--bg-color);
-}
+    &.active {
+      background-color: var(--accent-color);
+      color: var(--bg-color);
+    }
 
-.tabs button:hover:not(.active) {
-  background-color: var(--table-hover);
+    &:hover:not(.active) {
+      background-color: var(--table-hover);
+    }
+  }
 }
 
 .table-wrapper {
   overflow-x: auto;
   margin: 20px 0;
+  -webkit-overflow-scrolling: touch;
+  cursor: grab;
+  user-select: none;
+  max-width: 100%;
+  width: 100%;
+  box-sizing: border-box;
+  overflow-y: hidden;
+
+  &.dragging {
+    cursor: grabbing;
+  }
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 
 table {
   width: 100%;
-  border-collapse: collapse;
+  position: relative;
+  border-spacing: 0;
 
-  th, td {
-    padding: 12px;
-    border: 1px solid #666;
-    text-align: center;
+  tr {
+    margin: 0;
   }
 
   th {
+    padding: 12px;
+    border: 1px solid #666;
+    text-align: center;
     background-color: var(--accent-color);
     color: #ffffff;
     text-shadow: 2px 2px 4px #ff0000;
+    position: sticky;
+    left: 0; /* Возвращаем к исходному значению */
+    min-width: 120px;
+    z-index: 2;
+    vertical-align: middle;
+    line-height: 1;
+    box-sizing: border-box;
   }
 
   td {
+    padding: 12px;
+    border: 1px solid #666;
+    text-align: center;
     background-color: var(--table-bg);
+    min-width: 80px;
+    vertical-align: middle;
+    line-height: 1;
+    z-index: 1;
+    box-sizing: border-box;
 
     &:hover {
       background-color: var(--table-hover);
@@ -338,7 +439,6 @@ table {
   }
 }
 
-/* Медиа-запросы */
 @media (max-width: 600px) {
   .tab-header {
     flex-direction: column-reverse;
@@ -354,72 +454,58 @@ table {
   }
 }
 
-@media (max-width: 480px) {
-  h2 {
-    font-size: 1.1rem; /* Уменьшаем шрифт */
-  }
-
-  .back-link {
-    font-size: 1rem; /* Уменьшаем шрифт */
-  }
-
-  table {
-    font-size: 12px;
-  }
-  th, td {
-    padding: 6px;
-  }
-  .option {
-    padding: 3px;
-    font-size: 11px;
-  }
-  .tabs button {
-    padding: 6px 10px;
-    font-size: 0.8rem;
-  }
-  select {
-    padding: 3px;
-    font-size: 11px;
-  }
-}
-
 @media (max-width: 768px) {
-  .fighter-page {
-    max-width: 100%;
-  }
   table {
     font-size: 14px;
+
+    th,
+    td {
+      padding: 8px;
+    }
   }
-  th, td {
-    padding: 8px;
-  }
-  .tabs button {
-    padding: 8px 15px;
-    font-size: 0.9rem;
+
+  .tabs {
+    button {
+      padding: 8px 15px;
+      font-size: 0.9rem;
+    }
   }
 }
 
-@media (min-width: 1110px) {
-  .fighter-page {
-    max-width: 1400px;
+@media (max-width: 480px) {
+  .back-link {
+    font-size: 1rem;
   }
-}
 
-@media (min-width: 1240px) {
-  .fighter-page {
-    max-width: 1600px;
+  table {
+    font-size: 11px;
+
+    th {
+      padding: 6px;
+      min-width: 100px;
+    }
+
+    td {
+      padding: 6px;
+      min-width: 60px;
+    }
   }
-}
 
-@media (min-width: 1440px) {
-  .fighter-page {
-    max-width: 1800px;
+  .option {
+    padding: 3px;
+    font-size: 10px;
   }
-}
 
-@media (min-width: 1600px) {
-  .fighter-page {
-    max-width: 2000px;
+  .tabs {
+    button {
+      padding: 6px 10px;
+      font-size: 0.8rem;
+    }
+  }
+
+  select {
+    padding: 3px;
+    font-size: 10px;
   }
 }
 </style>

@@ -78,6 +78,330 @@
         "extraOptions": null
       },
       {
+        "name": "Blazing Fury",
+        "type": "string",
+        "variations": [
+          {
+            "variationName": "Blazing Fury",
+            "input": "3, 3",
+            "attackType": "Low",
+            "startup": 10,
+            "active": 3,
+            "recovery": 16,
+            "onBlock": -4,
+            "cancelable": true,
+            "cancelAdvantage": 8,
+            "damage": 55
+          }
+        ]
+      },
+      {
+        "name": "Inferno Slash",
+        "type": "string",
+        "variations": [
+          {
+            "variationName": "Inferno Slash",
+            "input": "4, 4",
+            "attackType": "High",
+            "startup": 8,
+            "active": 2,
+            "recovery": 14,
+            "onBlock": -1,
+            "cancelable": true,
+            "cancelAdvantage": 15,
+            "damage": 45
+          }
+        ]
+      },
+      {
+        "name": "Scorching Blow",
+        "type": "string",
+        "variations": [
+          {
+            "variationName": "Scorching Blow",
+            "input": "1, 2",
+            "attackType": "Mid",
+            "startup": 11,
+            "active": 3,
+            "recovery": 17,
+            "onBlock": -3,
+            "cancelable": false,
+            "cancelAdvantage": 0,
+            "damage": 65
+          }
+        ]
+      },
+      {
+        "name": "Flame Rush",
+        "type": "string",
+        "variations": [
+          {
+            "variationName": "Flame Rush",
+            "input": "2, 3",
+            "attackType": "Low",
+            "startup": 13,
+            "active": 4,
+            "recovery": 19,
+            "onBlock": -5,
+            "cancelable": true,
+            "cancelAdvantage": 9,
+            "damage": 70
+          }
+        ]
+      },
+      {
+        "name": "Burning Edge",
+        "type": "string",
+        "variations": [
+          {
+            "variationName": "Burning Edge",
+            "input": "3, 4",
+            "attackType": "High",
+            "startup": 9,
+            "active": 3,
+            "recovery": 15,
+            "onBlock": -2,
+            "cancelable": true,
+            "cancelAdvantage": 12,
+            "damage": 50
+          }
+        ]
+      },
+      {
+        "name": "Searing Strike",
+        "type": "string",
+        "variations": [
+          {
+            "variationName": "Searing Strike",
+            "input": "4, 1",
+            "attackType": "Mid",
+            "startup": 10,
+            "active": 3,
+            "recovery": 16,
+            "onBlock": -4,
+            "cancelable": false,
+            "cancelAdvantage": 0,
+            "damage": 60
+          }
+        ]
+      },
+      {
+        "name": "Fiery Combo",
+        "type": "string",
+        "variations": [
+          {
+            "variationName": "Fiery Combo",
+            "input": "1, 3",
+            "attackType": "Low",
+            "startup": 12,
+            "active": 4,
+            "recovery": 18,
+            "onBlock": -3,
+            "cancelable": true,
+            "cancelAdvantage": 10,
+            "damage": 55
+          }
+        ]
+      },
+      {
+        "name": "Blaze Assault",
+        "type": "string",
+        "variations": [
+          {
+            "variationName": "Blaze Assault",
+            "input": "2, 4",
+            "attackType": "High",
+            "startup": 8,
+            "active": 2,
+            "recovery": 14,
+            "onBlock": -1,
+            "cancelable": true,
+            "cancelAdvantage": 15,
+            "damage": 45
+          }
+        ]
+      },
+      {
+        "name": "Nether Strike",
+        "type": "string",
+        "variations": [
+          {
+            "variationName": "Nether Strike",
+            "input": "B+1, 2",
+            "attackType": "Mid",
+            "startup": 9,
+            "active": 3,
+            "recovery": 15,
+            "onBlock": -2,
+            "cancelable": true,
+            "cancelAdvantage": 10,
+            "damage": 50
+          }
+        ]
+      },
+      {
+        "name": "Scorpion Sting",
+        "type": "string",
+        "variations": [
+          {
+            "variationName": "Scorpion Sting",
+            "input": "F+2, 3",
+            "attackType": "Low",
+            "startup": 11,
+            "active": 4,
+            "recovery": 17,
+            "onBlock": -4,
+            "cancelable": true,
+            "cancelAdvantage": 8,
+            "damage": 60
+          }
+        ]
+      },
+      {
+        "name": "Hellfire Slash",
+        "type": "string",
+        "variations": [
+          {
+            "variationName": "Hellfire Slash",
+            "input": "B+3, 4",
+            "attackType": "High",
+            "startup": 8,
+            "active": 2,
+            "recovery": 14,
+            "onBlock": -1,
+            "cancelable": true,
+            "cancelAdvantage": 12,
+            "damage": 45
+          }
+        ]
+      },
+      {
+        "name": "Blazing Rush",
+        "type": "string",
+        "variations": [
+          {
+            "variationName": "Blazing Rush",
+            "input": "F+1, 3",
+            "attackType": "Mid",
+            "startup": 10,
+            "active": 3,
+            "recovery": 16,
+            "onBlock": -3,
+            "cancelable": false,
+            "cancelAdvantage": 0,
+            "damage": 65
+          }
+        ]
+      },
+      {
+        "name": "Infernal Combo",
+        "type": "string",
+        "variations": [
+          {
+            "variationName": "Infernal Combo",
+            "input": "2, 1",
+            "attackType": "Low",
+            "startup": 12,
+            "active": 4,
+            "recovery": 18,
+            "onBlock": -5,
+            "cancelable": true,
+            "cancelAdvantage": 9,
+            "damage": 55
+          }
+        ]
+      },
+      {
+        "name": "Fire Sweep",
+        "type": "string",
+        "variations": [
+          {
+            "variationName": "Fire Sweep",
+            "input": "D+4",
+            "attackType": "Low",
+            "startup": 14,
+            "active": 3,
+            "recovery": 20,
+            "onBlock": -6,
+            "cancelable": true,
+            "cancelAdvantage": 5,
+            "damage": 40
+          }
+        ]
+      },
+      {
+        "name": "Hell Kick",
+        "type": "string",
+        "variations": [
+          {
+            "variationName": "Hell Kick",
+            "input": "B+4",
+            "attackType": "Mid",
+            "startup": 12,
+            "active": 4,
+            "recovery": 18,
+            "onBlock": -4,
+            "cancelable": true,
+            "cancelAdvantage": 7,
+            "damage": 50
+          }
+        ]
+      },
+      {
+        "name": "Ashen Strike",
+        "type": "string",
+        "variations": [
+          {
+            "variationName": "Ashen Strike",
+            "input": "F+2, 1",
+            "attackType": "High",
+            "startup": 9,
+            "active": 3,
+            "recovery": 15,
+            "onBlock": -2,
+            "cancelable": true,
+            "cancelAdvantage": 10,
+            "damage": 45
+          }
+        ]
+      },
+      {
+        "name": "Ember Chain",
+        "type": "string",
+        "variations": [
+          {
+            "variationName": "Ember Chain",
+            "input": "1, 4",
+            "attackType": "Mid",
+            "startup": 10,
+            "active": 3,
+            "recovery": 16,
+            "onBlock": -3,
+            "cancelable": true,
+            "cancelAdvantage": 8,
+            "damage": 55
+          }
+        ]
+      },
+      {
+        "name": "Torch Finisher",
+        "type": "string",
+        "variations": [
+          {
+            "variationName": "Torch Finisher",
+            "input": "2, 2, 3",
+            "attackType": "Low",
+            "startup": 11,
+            "active": 4,
+            "recovery": 19,
+            "onBlock": -5,
+            "cancelable": false,
+            "cancelAdvantage": null,
+            "damage": 60
+          }
+        ]
+      },
+      {
         "name": "Spear",
         "type": "special move",
         "attackType": "Mid",
@@ -389,7 +713,10 @@
         "cancelAdvantage": null,
         "extraOptions": null,
         "ambush": false,
-        "kameoMeterCost": "hold (gradual)"
+        "kameoMeterCost": {
+          "activation": "0.5 bar",
+          "hold": "gradual"
+        }
       }
     ]
   }

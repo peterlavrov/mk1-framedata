@@ -42,18 +42,13 @@ export default {
 
 <style lang="scss" scoped>
 .home {
-  max-width: 800px;
   margin: 0 auto;
   color: var(--text-color);
+  padding-top: 60px;
 }
 
 section {
   margin-bottom: 2rem;
-}
-
-h2 {
-  color: var(--accent-color);
-  font-size: 1.3rem;
 }
 
 .character-list {
@@ -72,42 +67,6 @@ h2 {
         color: var(--link-hover);
       }
     }
-  }
-}
-
-@media (max-width: 768px) {
-  .character-list {
-    grid-template-columns: 1fr;
-  }
-}
-
-@media (min-width: 769px) {
-  .character-list {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-@media (min-width: 1024px) {
-  .character-list {
-    grid-template-columns: repeat(3, 1fr);
-  }
-}
-
-@media (min-width: 1240px) {
-  .character-list {
-    grid-template-columns: repeat(4, 1fr);
-  }
-}
-
-@media (min-width: 1440px) {
-  .character-list {
-    grid-template-columns: repeat(5, 1fr);
-  }
-}
-
-@media (min-width: 1600px) {
-  .character-list {
-    grid-template-columns: repeat(6, 1fr);
   }
 }
 </style>
