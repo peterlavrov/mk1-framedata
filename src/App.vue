@@ -1,47 +1,7 @@
-<script setup>
-import { RouterView } from 'vue-router';
-import { ref, onMounted, computed } from 'vue';
-
-const theme = ref('system');
-
-const isDark = computed({
-  get() {
-    if (theme.value === 'system') {
-      return window.matchMedia('(prefers-color-scheme: dark)').matches;
-    }
-    return theme.value === 'dark';
-  },
-  set(newValue) {
-    theme.value = newValue ? 'dark' : 'light';
-    applyTheme();
-  }
-});
-
-const applyTheme = () => {
-  if (theme.value === 'system') {
-    document.documentElement.removeAttribute('data-theme');
-  } else {
-    document.documentElement.setAttribute('data-theme', theme.value);
-  }
-  localStorage.setItem('theme', theme.value);
-};
-
-onMounted(() => {
-  const savedTheme = localStorage.getItem('theme');
-  if (savedTheme) {
-    theme.value = savedTheme;
-    applyTheme();
-  }
-});
-</script>
-
 <template>
-  <div class="app-wrapper">
-    <header>
-      <h1>Mortal Kombat 1 Frame Data</h1>
-    </header>
+  <div id="app">
     <div class="theme-toggle">
-      <input type="checkbox" id="theme-switch" v-model="isDark" />
+      <input type="checkbox" id="theme-switch" v-model="isDarkTheme" @change="toggleTheme" />
       <label for="theme-switch">
         <span class="toggle">
           <span class="icon sun">☀️</span>
@@ -49,24 +9,159 @@ onMounted(() => {
         </span>
       </label>
     </div>
-    <RouterView />
-    <footer class="developers">
-      <p>Developed by <a href="https://github.com/peterlavrov" target="_blank">Peter Lavrov</a> & Grok 3 (xAI)</p>
+    <router-view />
+    <footer class="footer">
+      <div class="navigation" :class="{ 'fixed': shouldShowNavigation }">
+        <router-link v-if="shouldShowBackLink" to="/" class="back-link">Back to Choose Your Destiny</router-link>
+        <button v-if="isScrolled" @click="scrollToTop" class="scroll-top">To Top</button>
+      </div>
+      <div class="developers">
+        Developed by: <a href="https://github.com/peterlavrov">Peter Lavrov</a> & Team xAI
+      </div>
     </footer>
   </div>
 </template>
 
-<style lang="scss" scoped>
-.app-wrapper {
-  position: relative;
+<script>
+export default {
+  name: 'App',
+  data() {
+    return {
+      isScrolled: false,
+      isNavigationFixed: false,
+      isDarkTheme: window.matchMedia('(prefers-color-scheme: dark)').matches
+    };
+  },
+  computed: {
+    isFighterPage() {
+      return this.$route.name === 'FighterView';
+    },
+    isHomePage() {
+      return this.$route.path === '/';
+    },
+    shouldShowNavigation() {
+      return this.isScrolled || (this.isFighterPage && this.isNavigationFixed);
+    },
+    shouldShowBackLink() {
+      return !this.isHomePage && (this.isFighterPage ? this.isNavigationFixed : true);
+    }
+  },
+  created() {
+    window.addEventListener('scroll', this.handleScroll);
+    this.applyTheme();
+  },
+  beforeDestroy() {
+    window.removeEventListener('scroll', this.handleScroll);
+  },
+  methods: {
+    handleScroll() {
+      const backLink = document.querySelector('.tab-header .back-link');
+      this.isScrolled = window.scrollY > 0;
+      if (this.isFighterPage && backLink) {
+        const rect = backLink.getBoundingClientRect();
+        this.isNavigationFixed = rect.top < 0;
+      } else {
+        this.isNavigationFixed = false;
+      }
+    },
+    scrollToTop() {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    },
+    toggleTheme() {
+      this.applyTheme();
+    },
+    applyTheme() {
+      document.documentElement.setAttribute('data-theme', this.isDarkTheme ? 'dark' : 'light');
+    }
+  }
+};
+</script>
+
+<style lang="scss">
+#app {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 1rem;
+  font-weight: normal;
+  color: var(--text-color);
 }
 
-header {
+.footer {
+  position: relative;
+  padding: 20px 0;
+}
+
+.navigation {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  justify-content: flex-end;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease;
+
+  &.fixed {
+    position: fixed;
+    bottom: 53px; /* Установлено по твоему запросу */
+    right: 20px;
+    opacity: 1;
+    visibility: visible;
+    z-index: 1000;
+  }
+
+  .back-link,
+  .scroll-top {
+    background-color: rgba(255, 255, 255, 0.7);
+    padding: 6px 10px;
+    border-radius: 5px 0 5px 0;
+    font-size: 0.7rem;
+    text-decoration: none;
+    color: var(--link-color);
+    font-family: 'Cinzel', serif;
+    transition: color 0.3s ease;
+  }
+
+  .back-link {
+    margin-right: 5px;
+  }
+
+  .back-link:hover,
+  .scroll-top:hover {
+    color: #0d47a1;
+  }
+
+  .scroll-top {
+    border: none;
+    cursor: pointer;
+  }
+}
+
+.developers {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: rgba(255, 255, 255, 0.7);
+  padding: 5px 10px;
+  font-size: 0.7rem;
   line-height: 1.5;
+  border-radius: 5px 0 5px 0;
   color: var(--text-color);
+  display: inline-block;
+  white-space: nowrap;
+  z-index: 999;
+
+  a {
+    color: var(--link-color);
+    text-decoration: none;
+
+    &:hover {
+      color: #0d47a1;
+    }
+  }
+}
+
+@media (max-width: 1240px) {
+  .developers {
+    border-radius: 5px 0 5px 0;
+  }
 }
 
 .theme-toggle {
@@ -102,7 +197,7 @@ header {
   transition: transform 0.3s ease;
   display: flex;
   align-items: center;
-  justify-content: center; /* Центрируем содержимое кружка */
+  justify-content: center;
 }
 
 .theme-toggle .icon {
@@ -114,13 +209,13 @@ header {
 
 .theme-toggle .sun {
   left: 50%;
-  transform: translate(-50%, -50%); /* Центрируем по горизонтали и вертикали */
+  transform: translate(-50%, -50%);
   opacity: 1;
 }
 
 .theme-toggle .moon {
   right: 50%;
-  transform: translate(50%, -50%); /* Центрируем по горизонтали и вертикали */
+  transform: translate(50%, -50%);
   opacity: 0;
 }
 
@@ -136,7 +231,6 @@ header {
   opacity: 1;
 }
 
-/* Адаптация переключателя */
 @media (max-width: 480px) {
   .theme-toggle label {
     width: 50px;
@@ -148,14 +242,6 @@ header {
   }
   .theme-toggle .icon {
     font-size: 14px;
-  }
-  .theme-toggle .sun {
-    left: 50%;
-    transform: translate(-50%, -50%);
-  }
-  .theme-toggle .moon {
-    right: 50%;
-    transform: translate(50%, -50%);
   }
   #theme-switch:checked + label .toggle {
     transform: translateX(25px);
@@ -174,48 +260,8 @@ header {
   .theme-toggle .icon {
     font-size: 12px;
   }
-  .theme-toggle .sun {
-    left: 50%;
-    transform: translate(-50%, -50%);
-  }
-  .theme-toggle .moon {
-    right: 50%;
-    transform: translate(50%, -50%);
-  }
   #theme-switch:checked + label .toggle {
     transform: translateX(20px);
-  }
-}
-
-.developers {
-  position: fixed;
-  bottom: 10px;
-  right: 10px;
-  font-size: 0.9rem;
-  color: var(--text-color);
-  z-index: 1000;
-
-  a {
-    color: var(--link-color);
-    text-decoration: none;
-
-    &:hover {
-      color: var(--link-hover);
-    }
-  }
-}
-
-@media (max-width: 480px) {
-  .developers {
-    font-size: 0.8rem;
-    bottom: 5px;
-    right: 5px;
-  }
-}
-
-@media (max-width: 360px) {
-  .developers {
-    font-size: 0.7rem;
   }
 }
 </style>

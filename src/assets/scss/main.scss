@@ -36,34 +36,38 @@ $link-blue: #4a90e2;
 /* Темная тема */
 html[data-theme="dark"] {
   --bg-color: #1a1a1a;
-  --text-color: #ffffff;
+  --text-color: #e0e0e0;
+  --accent-color: #ffcc00;
   --accent-hover: #ffd633;
+  --link-color: #4a90e2;
   --link-hover: #80c0ff;
-  --table-bg: #151515;
-  --table-hover: #2e2e2e;
+  --table-bg: #252525;
+  --table-hover: #383838;
 }
 
 /* Светлая тема */
 html[data-theme="light"] {
-  --bg-color: #e6e1d3;
-  --text-color: #2a1c1a;
-  --accent-color: #e6b800;
-  --accent-hover: #ffcc00;
-  --link-color: #1a73e8;
-  --link-hover: #135ab6;
-  --table-bg: #d9d2b8;
-  --table-hover: #c9c2a6;
+  --bg-color: #ffe8c2; /* Более теплый и заметный фон */
+  --text-color: #1a1a1a;
+  --accent-color: #d32f2f;
+  --accent-hover: #e57373;
+  --link-color: #1976d2;
+  --link-hover: #42a5f5;
+  --table-bg: #ffffff; /* Оставляем белый для таблицы */
+  --table-hover: #f0f0f0;
 }
 
 /* Системная тема */
 @media (prefers-color-scheme: dark) {
   html:not([data-theme]) {
     --bg-color: #1a1a1a;
-    --text-color: #ffffff;
+    --text-color: #e0e0e0;
+    --accent-color: #ffcc00;
     --accent-hover: #ffd633;
+    --link-color: #4a90e2;
     --link-hover: #80c0ff;
-    --table-bg: #151515;
-    --table-hover: #2e2e2e;
+    --table-bg: #252525;
+    --table-hover: #383838;
   }
 }
 
@@ -102,7 +106,6 @@ h1,
 h2 {
   color: var(--accent-color);
   font-size: 1.5rem;
-  text-shadow: 1px 1px 3px rgba(0, 0, 0, 1); /* Увеличили тень: больше размытие, полная непрозрачность */
 }
 
 a {

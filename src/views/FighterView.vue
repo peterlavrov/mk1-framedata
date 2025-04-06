@@ -10,7 +10,10 @@
       </div>
 
       <div class="tab-content" v-if="activeTab === 'strings'">
-        <h2>Strings</h2>
+        <div class="tab-header">
+          <h2>Strings</h2>
+          <router-link to="/" class="back-link">Back to Choose Your Destiny</router-link>
+        </div>
         <div class="table-wrapper">
           <table>
             <tbody>
@@ -36,7 +39,10 @@
       </div>
 
       <div class="tab-content" v-if="activeTab === 'special'">
-        <h2>Special Moves</h2>
+        <div class="tab-header">
+          <h2>Special Moves</h2>
+          <router-link to="/" class="back-link">Back to Choose Your Destiny</router-link>
+        </div>
         <div class="table-wrapper">
           <table>
             <tbody>
@@ -65,7 +71,10 @@
       </div>
 
       <div class="tab-content" v-if="activeTab === 'air'">
-        <h2>Air Attacks</h2>
+        <div class="tab-header">
+          <h2>Air Attacks</h2>
+          <router-link to="/" class="back-link">Back to Choose Your Destiny</router-link>
+        </div>
         <div class="table-wrapper">
           <table>
             <tbody>
@@ -91,7 +100,10 @@
     </section>
 
     <section v-if="isKameoFighter">
-      <h2>Kameo Moves</h2>
+      <div class="tab-header">
+        <h2>Kameo Moves</h2>
+        <router-link to="/" class="back-link">Back to Choose Your Destiny</router-link>
+      </div>
       <div class="table-wrapper">
         <table>
           <tbody>
@@ -113,8 +125,6 @@
         </table>
       </div>
     </section>
-
-    <router-link to="/" class="back-link">Back to Home</router-link>
   </div>
 </template>
 
@@ -161,9 +171,9 @@ export default {
       this.airSelections = this.airMoves.map(move => move.variations[move.variations.length - 1].input);
     },
     getOnBlockClass(onBlock) {
-      if (onBlock >= 0) return 'no-initiative-loss'; // Без потери инициативы
-      if (onBlock >= -6) return 'initiative-loss'; // С потерей инициативы
-      return 'unsafe'; // Небезопасный
+      if (onBlock >= 0) return 'no-initiative-loss';
+      if (onBlock >= -6) return 'initiative-loss';
+      return 'unsafe';
     },
     hasExtraOptions(moves) {
       return moves.some(move => move.extraOptions && move.extraOptions.length > 0);
@@ -203,7 +213,13 @@ section {
 h2 {
   color: var(--accent-color);
   font-size: 1.3rem;
-  text-shadow: 1px 1px 3px rgba(0, 0, 0, 1); /* Та же тень, что в main.scss */
+}
+
+.tab-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
 }
 
 .tabs {
@@ -242,15 +258,14 @@ table {
 
   th, td {
     padding: 12px;
-    border: 1px solid #333;
+    border: 1px solid #666;
     text-align: center;
   }
 
   th {
     background-color: var(--accent-color);
-    color: var(--bg-color);
-    white-space: nowrap;
-    text-shadow: 1px 1px 3px rgba(0, 0, 0, 1);
+    color: #ffffff;
+    text-shadow: 2px 2px 4px #ff0000;
   }
 
   td {
@@ -269,19 +284,34 @@ table {
     padding: 5px;
   }
 
-  .no-initiative-loss { /* Было .safe */
-    color: #008000;
-    text-shadow: 1px 1px 3px rgba(0, 0, 0, 1);
+  .no-initiative-loss {
+    background-color: #006600;
+    color: #ffffff;
+    text-shadow: 3px 3px 12px #ff0000;
+
+    &:hover {
+      background-color: #008000;
+    }
   }
 
-  .initiative-loss { /* Было .unsafe */
-    color: #e6b800;
-    text-shadow: 1px 1px 3px rgba(0, 0, 0, 1);
+  .initiative-loss {
+    background-color: #b38600;
+    color: #ffffff;
+    text-shadow: 3px 3px 12px #ff0000;
+
+    &:hover {
+      background-color: #e6b800;
+    }
   }
 
-  .unsafe { /* Было .punishable */
-    color: #ff3333;
-    text-shadow: 1px 1px 3px rgba(0, 0, 0, 1);
+  .unsafe {
+    background-color: #cc2929;
+    color: #ffffff;
+    text-shadow: 3px 3px 12px #ff0000;
+
+    &:hover {
+      background-color: #ff3333;
+    }
   }
 
   .extra-options {
@@ -299,7 +329,6 @@ table {
 }
 
 .back-link {
-  display: inline-block;
   color: var(--link-color);
   text-decoration: none;
   font-size: 1.2rem;
@@ -309,24 +338,31 @@ table {
   }
 }
 
-/* Медиа-запросы без изменений */
-@media (max-width: 768px) {
-  .fighter-page {
-    max-width: 100%;
-  }
-  table {
-    font-size: 14px;
-  }
-  th, td {
-    padding: 8px;
-  }
-  .tabs button {
-    padding: 8px 15px;
-    font-size: 0.9rem;
+/* Медиа-запросы */
+@media (max-width: 600px) {
+  .tab-header {
+    flex-direction: column-reverse;
+    align-items: stretch;
+
+    h2 {
+      align-self: flex-start;
+    }
+
+    .back-link {
+      align-self: flex-end;
+    }
   }
 }
 
 @media (max-width: 480px) {
+  h2 {
+    font-size: 1.1rem; /* Уменьшаем шрифт */
+  }
+
+  .back-link {
+    font-size: 1rem; /* Уменьшаем шрифт */
+  }
+
   table {
     font-size: 12px;
   }
@@ -344,6 +380,22 @@ table {
   select {
     padding: 3px;
     font-size: 11px;
+  }
+}
+
+@media (max-width: 768px) {
+  .fighter-page {
+    max-width: 100%;
+  }
+  table {
+    font-size: 14px;
+  }
+  th, td {
+    padding: 8px;
+  }
+  .tabs button {
+    padding: 8px 15px;
+    font-size: 0.9rem;
   }
 }
 
