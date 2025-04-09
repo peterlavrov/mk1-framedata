@@ -4,8 +4,8 @@
       <input type="checkbox" id="theme-switch" v-model="isDarkTheme" @change="toggleTheme" />
       <label for="theme-switch">
         <span class="toggle">
-          <span class="icon sun">☀️</span>
-          <span class="icon moon">🌙</span>
+          <span class="icon liu-kang"></span>
+          <span class="icon havik"></span>
         </span>
       </label>
     </div>
@@ -84,7 +84,7 @@ export default {
   padding: 1rem;
   box-sizing: border-box;
   overflow-x: hidden;
-  min-height: 100vh; /* Перенесли из .app-root */
+  min-height: 100vh;
 }
 
 .footer {
@@ -110,7 +110,7 @@ export default {
 
   .back-link,
   .scroll-top {
-    background-color: rgba(255, 255, 255, 0.7);
+    background-color: rgba(0, 0, 0, 0.7);
     padding: 6px 10px;
     border-radius: 5px 0 5px 0;
     font-size: 0.7rem;
@@ -126,7 +126,7 @@ export default {
 
   .back-link:hover,
   .scroll-top:hover {
-    color: #0d47a1;
+    color: var(--link-hover);
   }
 
   .scroll-top {
@@ -139,7 +139,7 @@ export default {
   position: fixed;
   bottom: 20px;
   right: 20px;
-  background-color: rgba(255, 255, 255, 0.7);
+  background-color: rgba(0, 0, 0, 0.7);
   padding: 5px 10px;
   font-size: 0.7rem;
   line-height: 1.5;
@@ -150,12 +150,25 @@ export default {
   z-index: 999;
 
   a {
-    color: var(--link-color);
+    padding: 2px 5px;
+    background-color: #223e6b;
+    color: #b2c1d8;
     text-decoration: none;
+    border-radius: 3px;
+    transition: color 0.3s ease;
 
     &:hover {
-      color: #0d47a1;
+      color: #c1950e;
+      background-color: #223e6b;
     }
+  }
+
+  html[data-theme="light"] & {
+    color: #d9d9d9;
+  }
+
+  html[data-theme="dark"] & {
+    color: var(--text-color);
   }
 }
 
@@ -178,10 +191,10 @@ export default {
 
 .theme-toggle label {
   display: block;
-  width: 60px;
-  height: 30px;
+  width: 64px; // Увеличиваем ширину переключателя
+  height: 32px; // Увеличиваем высоту переключателя
   background-color: var(--text-color);
-  border-radius: 15px;
+  border-radius: 16px; // Пропорционально увеличиваем радиус
   position: relative;
   cursor: pointer;
   transition: background-color 0.3s ease;
@@ -189,10 +202,10 @@ export default {
 
 .theme-toggle .toggle {
   position: absolute;
-  top: 2px;
-  left: 2px;
-  width: 26px;
-  height: 26px;
+  top: 0; // Убираем отступ сверху, чтобы круг был вровень с краями
+  left: 0; // Убираем отступ слева
+  width: 32px; // Устанавливаем размер круга 32x32
+  height: 32px;
   background-color: var(--accent-color);
   border-radius: 50%;
   transition: transform 0.3s ease;
@@ -205,64 +218,73 @@ export default {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  font-size: 16px;
+  width: 32px; // Растягиваем иконку на всю ширину круга
+  height: 32px; // Растягиваем иконку на всю высоту круга
+  background-size: contain;
+  background-repeat: no-repeat;
 }
 
-.theme-toggle .sun {
+.theme-toggle .liu-kang {
   left: 50%;
   transform: translate(-50%, -50%);
   opacity: 1;
+  background-image: url('@/assets/images/liu-kang-icon.webp');
 }
 
-.theme-toggle .moon {
+.theme-toggle .havik {
   right: 50%;
   transform: translate(50%, -50%);
   opacity: 0;
+  background-image: url('@/assets/images/havik-icon.webp');
 }
 
 #theme-switch:checked + label .toggle {
-  transform: translateX(30px);
+  transform: translateX(32px); // Сдвигаем круг на ширину круга (32px)
 }
 
-#theme-switch:checked + label .sun {
+#theme-switch:checked + label .liu-kang {
   opacity: 0;
 }
 
-#theme-switch:checked + label .moon {
+#theme-switch:checked + label .havik {
   opacity: 1;
 }
 
 @media (max-width: 480px) {
   .theme-toggle label {
-    width: 50px;
-    height: 25px;
+    width: 54px; // Уменьшаем ширину переключателя
+    height: 27px; // Уменьшаем высоту переключателя
+    border-radius: 13.5px; // Пропорционально уменьшаем радиус
   }
   .theme-toggle .toggle {
-    width: 21px;
-    height: 21px;
+    width: 27px; // Уменьшаем размер круга
+    height: 27px;
   }
   .theme-toggle .icon {
-    font-size: 14px;
+    width: 27px; // Уменьшаем размер иконки
+    height: 27px;
   }
   #theme-switch:checked + label .toggle {
-    transform: translateX(25px);
+    transform: translateX(27px); // Сдвигаем круг на новую ширину круга
   }
 }
 
 @media (max-width: 360px) {
   .theme-toggle label {
-    width: 40px;
-    height: 20px;
+    width: 44px; // Ещё больше уменьшаем ширину переключателя
+    height: 22px; // Ещё больше уменьшаем высоту переключателя
+    border-radius: 11px; // Пропорционально уменьшаем радиус
   }
   .theme-toggle .toggle {
-    width: 16px;
-    height: 16px;
+    width: 22px; // Ещё больше уменьшаем размер круга
+    height: 22px;
   }
   .theme-toggle .icon {
-    font-size: 12px;
+    width: 22px; // Ещё больше уменьшаем размер иконки
+    height: 22px;
   }
   #theme-switch:checked + label .toggle {
-    transform: translateX(20px);
+    transform: translateX(22px); // Сдвигаем круг на новую ширину круга
   }
 }
 </style>

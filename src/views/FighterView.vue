@@ -297,7 +297,7 @@ section {
   button {
     padding: 10px 20px;
     background-color: var(--table-bg);
-    border: 1px solid #333;
+    border: 1px solid #333333;
     border-radius: 5px;
     color: var(--text-color);
     cursor: pointer;
@@ -305,7 +305,8 @@ section {
 
     &.active {
       background-color: var(--accent-color);
-      color: var(--bg-color);
+      color: #ffffff;
+      text-shadow: 2px 2px 4px #000000;
     }
 
     &:hover:not(.active) {
@@ -347,13 +348,13 @@ table {
 
   th {
     padding: 12px;
-    border: 1px solid #666;
+    border: 1px solid #333333;
     text-align: center;
     background-color: var(--accent-color);
     color: #ffffff;
-    text-shadow: 2px 2px 4px #ff0000;
+    text-shadow: 2px 2px 4px #000000;
     position: sticky;
-    left: 0; /* Возвращаем к исходному значению */
+    left: 0;
     min-width: 120px;
     z-index: 2;
     vertical-align: middle;
@@ -363,7 +364,7 @@ table {
 
   td {
     padding: 12px;
-    border: 1px solid #666;
+    border: 1px solid #333333;
     text-align: center;
     background-color: var(--table-bg);
     min-width: 80px;
@@ -380,7 +381,7 @@ table {
   select {
     background-color: var(--table-bg);
     color: var(--text-color);
-    border: 1px solid #333;
+    border: 1px solid #333333;
     border-radius: 3px;
     padding: 5px;
   }
@@ -430,12 +431,18 @@ table {
 }
 
 .back-link {
-  color: var(--link-color);
+  display: inline-block;
+  padding: 5px 10px;
+  background-color: #223e6b; // Фон для обеих тем
+  color: #b2c1d8; // Цвет текста для обеих тем
   text-decoration: none;
   font-size: 1.2rem;
+  border-radius: 5px;
+  transition: color 0.3s ease;
 
   &:hover {
-    color: var(--link-hover);
+    color: #c1950e; // Цвет при наведении для обеих тем
+    background-color: #223e6b; // Фон не меняется
   }
 }
 

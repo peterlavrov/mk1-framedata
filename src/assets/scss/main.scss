@@ -47,14 +47,13 @@ html[data-theme="dark"] {
 
 /* Светлая тема */
 html[data-theme="light"] {
-  --bg-color: #ffe8c2;
-  --text-color: #1a1a1a;
-  --accent-color: #d32f2f;
-  --accent-hover: #e57373;
-  --link-color: #1976d2;
-  --link-hover: #42a5f5;
-  --table-bg: #ffffff;
-  --table-hover: #f0f0f0;
+  --bg-color: #e5e5e5;
+  --text-color: #223e6b;
+  --accent-color: #f43928;
+  --link-color: #b2c1d8;
+  --link-hover: #c1950e;
+  --table-bg: #c0c0c0;
+  --table-hover: #a9a9a9;
 }
 
 /* Системная тема */
@@ -104,14 +103,33 @@ body {
   box-sizing: border-box;
 }
 
-h1 {
-  color: var(--accent-color);
-  font-size: 1.5rem;
+/* Стили для h1 и h2 в светлой теме */
+html[data-theme="light"] {
+  h1,
+  h2 {
+    color: #223e6b;
+    text-shadow: 1px 1px 3px #83bff2;
+  }
 }
 
-h2 {
-  color: var(--accent-color);
-  font-size: 1.3rem;
+/* Стили для h1 и h2 в тёмной теме */
+html[data-theme="dark"] {
+  h1,
+  h2 {
+    color: var(--accent-color);
+    text-shadow: none;
+  }
+}
+
+/* Стили для системной темы */
+@media (prefers-color-scheme: dark) {
+  html:not([data-theme]) {
+    h1,
+    h2 {
+      color: var(--accent-color);
+      text-shadow: none;
+    }
+  }
 }
 
 a {

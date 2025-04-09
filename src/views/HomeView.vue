@@ -59,14 +59,34 @@ section {
 
   li {
     a {
-      color: var(--link-color);
+      display: block;
+      padding: 10px 20px;
+      background-color: #223e6b; // Фон для обеих тем
+      color: #b2c1d8; // Цвет текста для обеих тем
       text-decoration: none;
       font-size: 1.2rem;
+      border-radius: 5px;
+      transition: color 0.3s ease;
 
       &:hover {
-        color: var(--link-hover);
+        color: #c1950e; // Цвет при наведении для обеих тем
+        background-color: #223e6b; // Фон не меняется
       }
     }
+  }
+}
+
+@media (max-width: 768px) {
+  .character-list li a {
+    padding: 8px 15px;
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .character-list li a {
+    padding: 6px 10px;
+    font-size: 0.9rem;
   }
 }
 </style>
